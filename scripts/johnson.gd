@@ -11,11 +11,10 @@ func _physics_process(_delta):
 	if input_direction.x > 0:
 		anim.play("run")
 		anim.flip_h = false
-		pass
-	elif input_direction.x < 0 or input_direction.y < 0:
+	elif input_direction.x < 0:
 		anim.flip_h = true
 		anim.play("run")
-	elif input_direction.y > 0 or input_direction.y > 0:
+	elif input_direction.y > 0 or input_direction.y < 0:
 		anim.play("run")
 	else:
 		anim.play("idle")
