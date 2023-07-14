@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dh5q3y5jtejab"]
+[gd_scene load_steps=27 format=3 uid="uid://dh5q3y5jtejab"]
 
 [ext_resource type="Script" path="res://scripts/johnson.gd" id="1_cdrqd"]
 [ext_resource type="Texture2D" uid="uid://bwqmrm52uwk7x" path="res://assets/AssetPack-V1/Sprite Sheets/Character Idle 48x48.png" id="2_3jwmq"]
@@ -9,6 +9,14 @@ radius = 9.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upnfd"]
 size = Vector2(17.5, 6.5)
+
+[sub_resource type="Animation" id="Animation_ag1vo"]
+resource_name = "sword_idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hfqiy"]
+_data = {
+"sword_idle": SubResource("Animation_ag1vo")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g8jfv"]
 atlas = ExtResource("2_3jwmq")
@@ -146,7 +154,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [node name="Johnson" type="CharacterBody2D"]
@@ -163,6 +171,9 @@ position = Vector2(-0.25, -4.25)
 shape = SubResource("RectangleShape2D_upnfd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hfqiy")
+}
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -17)

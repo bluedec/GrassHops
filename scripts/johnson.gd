@@ -1,48 +1,25 @@
 extends CharacterBody2D
 
-const GRAVITY = 300
-const SPEED = 250
-
+@onready var speed = 120
 @onready var anim = $AnimatedSprite2D
 
-func _physics_process(delta):
-	movement()
-	pass
-
-func movement():
-	if Input.is_action_pressed("left", true):
-		if Input.is_action_pressed("up"):
-			position.y -= (GRAVITY / SPEED) * 1.5
-			pass
-		if Input.is_action_pressed("down"):
-			position.y += (GRAVITY / SPEED) * 1.5
-			pass
-		position.x -= (GRAVITY / SPEED) * 2.5
+func _physics_process(_delta):
+	var input_direction = Vector2(
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		Input.get_action_strength("down") - Input.get_action_strength("up")
+	)
+	if input_direction.x > 0:
+		anim.play("run")
+		anim.flip_h = false
+		pass
+	elif input_direction.x < 0 or input_direction.y < 0:
 		anim.flip_h = true
 		anim.play("run")
-		
-	elif Input.is_action_pressed("right", true):
-		if Input.is_action_pressed("up"):
-			position.y -= (GRAVITY / SPEED) * 1.5
-			pass
-		if Input.is_action_pressed("down"):
-			position.y += (GRAVITY / SPEED) * 1.5
-			pass
-		position.x += (GRAVITY / SPEED) * 2.5
-		anim.flip_h = false
+	elif input_direction.y > 0 or input_direction.y > 0:
 		anim.play("run")
-		
-	elif Input.is_action_pressed("down", true):
-		position.y += (GRAVITY / SPEED) * 2.5
-		anim.play("run")
-		
-	elif Input.is_action_pressed("up", true):
-		position.y -= (GRAVITY / SPEED) * 2.5
-		anim.play("run")
-		
 	else:
 		anim.play("idle")
 		
+	velocity = input_direction * speed
 	move_and_slide()
-	pass
-	
+
