@@ -41,6 +41,8 @@ func _physics_process(_delta):
 	calculate_velocity_and_slide(input_direction)
 	
 func attack(combo):
+	print("jesus change")
+	print("lol")
 	if combo == 0:
 		sprite.animation = "punch"
 		anim.play("punch")
