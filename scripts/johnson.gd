@@ -38,12 +38,10 @@ func _physics_process(_delta):
 func attack(combo):
 	if combo == 0:
 		anim.play("punch")
-		await anim.animation_finished
 		combo += 1
 	elif combo == 1:
 		if combo_cooldown <= 0:
 			anim.play("punch_2")
-			await anim.animation_finished
 			combo += 1
 			combo_cooldown = 0.5
 	else:
