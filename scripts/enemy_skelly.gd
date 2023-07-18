@@ -16,12 +16,10 @@ func _physics_process(_delta):
 	
 func _on_detection_area_body_entered(body):
 	player = body
-	visible = false
 	is_player_in_radius = true
 
 
 func _on_detection_area_body_exited(body):
-	visible = true
 	player = null
 	is_player_in_radius = false
 
