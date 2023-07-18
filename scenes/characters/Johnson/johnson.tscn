@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dh5q3y5jtejab"]
+[gd_scene load_steps=63 format=3 uid="uid://dh5q3y5jtejab"]
 
 [ext_resource type="Script" path="res://scripts/johnson.gd" id="1_cdrqd"]
 [ext_resource type="Texture2D" uid="uid://bwqmrm52uwk7x" path="res://assets/AssetPack-V1/Sprite Sheets/Character Idle 48x48.png" id="2_3jwmq"]
@@ -303,6 +303,17 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_ek373"]
 resource_name = "idle"
@@ -394,6 +405,51 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4axwx"]
 radius = 9.0
 
+[sub_resource type="Animation" id="Animation_55rxu"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ksc11"]
+_data = {
+"idle": SubResource("Animation_55rxu")
+}
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_447cg"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ffo11"]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_brcry"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jarcu"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8li80"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_by6yj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d63fe"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7vwcm"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fh7v7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q2ith"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_50mwe"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_447cg")
+states/Idle/position = Vector2(330, 127)
+states/Punch/node = SubResource("AnimationNodeBlendSpace2D_ffo11")
+states/Punch/position = Vector2(423, 48)
+states/Run/node = SubResource("AnimationNodeBlendSpace2D_brcry")
+states/Run/position = Vector2(261, 48)
+states/Start/position = Vector2(160, 127)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jarcu"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_8li80"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_by6yj"), "Idle", "Punch", SubResource("AnimationNodeStateMachineTransition_d63fe"), "Punch", "Idle", SubResource("AnimationNodeStateMachineTransition_7vwcm"), "Punch", "Run", SubResource("AnimationNodeStateMachineTransition_fh7v7"), "Run", "Punch", SubResource("AnimationNodeStateMachineTransition_q2ith")]
+
 [node name="Johnson" type="CharacterBody2D"]
 light_mask = 3
 visibility_layer = 3
@@ -425,3 +481,15 @@ zoom = Vector2(1.5, 1.5)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_4axwx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ksc11")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_50mwe")
+anim_player = NodePath("../AnimatedSprite2D/AnimationPlayer")
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Punch/blend_position = Vector2(0, 0)
+parameters/Run/blend_position = Vector2(0, 0)
