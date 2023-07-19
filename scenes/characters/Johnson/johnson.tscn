@@ -424,21 +424,29 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8li80"]
 advance_mode = 2
+advance_condition = &"is_running"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_by6yj"]
 advance_mode = 2
+advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d63fe"]
 advance_mode = 2
+advance_condition = &"is_punching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7vwcm"]
+switch_mode = 2
 advance_mode = 2
+advance_condition = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fh7v7"]
+switch_mode = 2
 advance_mode = 2
+advance_condition = &"is_running"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q2ith"]
 advance_mode = 2
+advance_condition = &"is_punching"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_50mwe"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_447cg")
@@ -490,6 +498,9 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_50mwe")
 anim_player = NodePath("../AnimatedSprite2D/AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/is_punching = false
+parameters/conditions/is_running = false
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Punch/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)

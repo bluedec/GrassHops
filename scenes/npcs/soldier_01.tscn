@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr4dk8akklmbb"]
+
+[ext_resource type="Texture2D" uid="uid://d0g7j1i12dgmj" path="res://assets/GrassHops Asset Pack/enemies/soldier_01/soldier_01.png" id="1_1gdc4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vup4s"]
+size = Vector2(13, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_020vs"]
+atlas = ExtResource("1_1gdc4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwx3a"]
+atlas = ExtResource("1_1gdc4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qcloq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_020vs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwx3a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="soldier_01" type="CharacterBody2D"]
+scale = Vector2(1.71571, 1.71571)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -12.5)
+shape = SubResource("RectangleShape2D_vup4s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -13)
+sprite_frames = SubResource("SpriteFrames_qcloq")

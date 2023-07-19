@@ -1,27 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dd3t1i5yr3b3p"]
-
-[ext_resource type="Texture2D" uid="uid://dy2cqiuam3v6o" path="res://assets/Asset Pack-V3/PlayerWalk/PlayerWalk 48x48.png" id="1_6p3f0"]
+[gd_scene load_steps=15 format=3 uid="uid://dd3t1i5yr3b3p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tkdpi"]
 size = Vector2(34, 48)
-
-[sub_resource type="Animation" id="Animation_83d16"]
-resource_name = "walk"
-length = 0.8
-loop_mode = 1
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 0.392292),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
 
 [sub_resource type="Animation" id="Animation_ia1l3"]
 length = 0.001
@@ -51,6 +31,24 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_83d16"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 0.392292),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
@@ -96,9 +94,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Bobby" type="CharacterBody2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_6p3f0")
-hframes = 8
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -106,7 +102,7 @@ position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_tkdpi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
+root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_rvq77")
 }

@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 @onready var speed = 120
-@onready var sprite = $AnimatedSprite2D
-@onready var anim = $AnimatedSprite2D/AnimationPlayer
+@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var anim : AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
+@onready var animation_tree : AnimationTree = $AnimationTree
 var combo : int = 0
 var combo_cooldown : float = 0.5
 
@@ -37,6 +38,7 @@ func _physics_process(_delta):
 	combo_cooldown -= 0.01
 	if Input.is_action_pressed("basic_attack"):
 		attack(combo)
+		update_animation_parameters()
 		
 	calculate_velocity_and_slide(input_direction)
 	
@@ -59,4 +61,11 @@ func attack(combo):
 func calculate_velocity_and_slide(input_direction):
 	velocity = input_direction * speed
 	move_and_slide()
+	
+func update_animation_parameters():
+	animation_tree["parameters/conditions/idle"] = true
+	animation_tree["parameters/conditions/is_punching"] = true
+	animation_tree["parameters/conditions/is_running"] = true
+	pass
+	
 	
