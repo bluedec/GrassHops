@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=700
 window/size/viewport_height=400
+mouse_cursor/custom_image="res://assets/GrassHops Asset Pack/misc/pointer.png"
 
 [input]
 
