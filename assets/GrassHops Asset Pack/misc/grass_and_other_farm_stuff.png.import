@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhtamw6682p60"
-path="res://.godot/imported/soldier_01-sheet.png-244bab5d5a091606483a774d3ea2c8ef.ctex"
+uid="uid://caow3idw3h81j"
+path="res://.godot/imported/grass_and_other_farm_stuff.png-8d1d9d98dd55af15fdc4f040d55c2964.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GrassHops Asset Pack/enemies/soldier_01/soldier_01-sheet.png"
-dest_files=["res://.godot/imported/soldier_01-sheet.png-244bab5d5a091606483a774d3ea2c8ef.ctex"]
+source_file="res://assets/GrassHops Asset Pack/misc/grass_and_other_farm_stuff.png"
+dest_files=["res://.godot/imported/grass_and_other_farm_stuff.png-8d1d9d98dd55af15fdc4f040d55c2964.ctex"]
 
 [params]
 

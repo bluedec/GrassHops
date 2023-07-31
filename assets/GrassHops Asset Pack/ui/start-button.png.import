@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0g7j1i12dgmj"
-path="res://.godot/imported/soldier_01.png-7c30255c84653cbb2d2183042b385821.ctex"
+uid="uid://b4b3itnf6ffj7"
+path="res://.godot/imported/start-button.png-93249cdb1dc79f7d37a7447c0187998e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/GrassHops Asset Pack/enemies/soldier_01/soldier_01.png"
-dest_files=["res://.godot/imported/soldier_01.png-7c30255c84653cbb2d2183042b385821.ctex"]
+source_file="res://assets/GrassHops Asset Pack/ui/start-button.png"
+dest_files=["res://.godot/imported/start-button.png-93249cdb1dc79f7d37a7447c0187998e.ctex"]
 
 [params]
 

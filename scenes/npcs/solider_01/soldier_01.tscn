@@ -1,28 +1,28 @@
 [gd_scene load_steps=9 format=3 uid="uid://cr4dk8akklmbb"]
 
-[ext_resource type="Texture2D" uid="uid://d0g7j1i12dgmj" path="res://assets/GrassHops Asset Pack/enemies/soldier_01/soldier_01.png" id="1_1gdc4"]
 [ext_resource type="Script" path="res://scenes/npcs/solider_01/soldier_01.gd" id="1_gqdcm"]
-[ext_resource type="Texture2D" uid="uid://5a3e7ywoff74" path="res://assets/GrassHops Asset Pack/misc/question_mark_and_exclamation.png" id="3_e302n"]
+[ext_resource type="Texture2D" uid="uid://d0g7j1i12dgmj" path="res://assets/GrassHops Asset Pack/npcs/soldier_01/soldier_01.png" id="2_hdjb8"]
+[ext_resource type="PackedScene" uid="uid://crptx17xlt3gm" path="res://scenes/emotion/emotion.tscn" id="3_flbyy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vup4s"]
-size = Vector2(11.8095, 25)
+size = Vector2(5, 10.3199)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqkbe"]
-atlas = ExtResource("1_1gdc4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_apskq"]
+atlas = ExtResource("2_hdjb8")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_icuvo"]
-atlas = ExtResource("1_1gdc4")
+[sub_resource type="AtlasTexture" id="AtlasTexture_34d5b"]
+atlas = ExtResource("2_hdjb8")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_qcloq"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_khu75"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dqkbe")
+"texture": SubResource("AtlasTexture_apskq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_icuvo")
+"texture": SubResource("AtlasTexture_34d5b")
 }],
 "loop": true,
 "name": &"default",
@@ -30,35 +30,29 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaojb"]
-size = Vector2(6.83261, 20.0262)
+size = Vector2(5.14472, 20.8994)
 
 [node name="soldier_01" type="CharacterBody2D"]
-scale = Vector2(2.2377, 2.2377)
+scale = Vector2(1.8, 1.8)
 script = ExtResource("1_gqdcm")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0.0952265, -12.5)
+position = Vector2(-0.277778, -5.95118)
 shape = SubResource("RectangleShape2D_vup4s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, -13)
-sprite_frames = SubResource("SpriteFrames_qcloq")
+position = Vector2(0, -13.1313)
+sprite_frames = SubResource("SpriteFrames_khu75")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="Mouse_Collider" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2(0.0930392, -12.5129)
+position = Vector2(-0.555556, -13.0583)
 scale = Vector2(1.72777, 1.24911)
 shape = SubResource("RectangleShape2D_jaojb")
 
-[node name="quest_marker" type="Sprite2D" parent="."]
-position = Vector2(0.446888, -34.8573)
-scale = Vector2(0.477623, 0.477623)
-texture = ExtResource("3_e302n")
-hframes = 2
-frame = 1
+[node name="Emotion" parent="." instance=ExtResource("3_flbyy")]
+position = Vector2(0, -36.0269)
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

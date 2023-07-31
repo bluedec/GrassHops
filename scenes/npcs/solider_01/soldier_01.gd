@@ -1,26 +1,28 @@
 extends CharacterBody2D
 
 @onready var sprite = $AnimatedSprite2D
-@onready var quest_marker = $quest_marker
+@onready var emotion_controller = $Emotion 
 var has_quest = false
 var has_reward = false
 var waiting_for_completion = true
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if has_quest:
-		quest_marker.frame = 0
+		emotion_controller.start_question()
 	elif has_reward:
-		quest_marker.frame = 1
-	elif waiting_for_completion:
-		quest_marker.modulate = Color(1,1,1, 0.4)
+		emotion_controller.start_exclamation()
+	else:
+		emotion_controller.idle()
+	pass
+
 
 func _on_area_2d_mouse_entered():
-	sprite.frame = 1
-	quest_marker.position.y -= 2
-	pass # Replace with function body.
+	has_quest = true
+	has_reward = false
+	pass 
 
 func _on_area_2d_mouse_exited():
-	sprite.frame = 0
-	quest_marker.position.y += 2
-	pass # Replace with function body.
+	has_quest = false
+	has_reward = true
+	pass

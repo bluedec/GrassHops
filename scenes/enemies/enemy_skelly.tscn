@@ -163,14 +163,14 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s0att"]
-radius = 519.353
+radius = 848.215
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uyg1"]
 size = Vector2(69.8656, 167.677)
 
 [node name="enemy_skelly" type="CharacterBody2D"]
 position = Vector2(-1, -18)
-scale = Vector2(0.143132, 0.143132)
+scale = Vector2(0.155, 0.155)
 script = ExtResource("1_jjatu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
