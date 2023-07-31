@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://vh257mladysl"]
+[gd_scene load_steps=19 format=3 uid="uid://vh257mladysl"]
 
 [ext_resource type="Script" path="res://scenes/characters/Sonny/Sonny.gd" id="1_hk164"]
 [ext_resource type="Texture2D" uid="uid://baeqsu8b6wnx8" path="res://assets/GrassHops Asset Pack/characters/sonny.png" id="2_aw34o"]
@@ -236,8 +236,13 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_6shcr"]
 radius = 8.90623
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ltlo"]
+size = Vector2(34.7222, 24.4444)
+
 [node name="Sonny" type="CharacterBody2D"]
 scale = Vector2(1.8, 1.8)
+collision_layer = 7
+collision_mask = 5
 platform_on_leave = 2
 script = ExtResource("1_hk164")
 
@@ -264,4 +269,15 @@ light_mask = 3
 visibility_layer = 3
 shape = SubResource("CircleShape2D_6shcr")
 
+[node name="Sword_Hitbox_Detector" type="Area2D" parent="."]
+position = Vector2(3.88889, 6.66667)
+collision_layer = 4
+collision_mask = 4
+
+[node name="Sword_Hitbox" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
+position = Vector2(-3.88889, 1.66667)
+shape = SubResource("RectangleShape2D_3ltlo")
+disabled = true
+
 [connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="Sprite2D/AnimationPlayer" method="_on_animation_finished"]
+[connection signal="body_entered" from="Sword_Hitbox_Detector" to="." method="_on_sword_hitbox_detector_body_entered"]

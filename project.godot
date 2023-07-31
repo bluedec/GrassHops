@@ -59,6 +59,10 @@ basic_attack={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_3="Can Receive Damage"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

@@ -2,15 +2,19 @@ extends CharacterBody2D
 
 @onready var speed = 120
 @onready var anim : AnimationPlayer = $Sprite2D/AnimationPlayer
+@onready var sword_hitbox : Area2D = $Sword_Hitbox_Detector
+@onready var sword_shape : CollisionShape2D = $Sword_Hitbox_Detector/Sword_Hitbox
+
 var combo : int = 0
 var combo_cooldown : float = 0.5
 var dir = "down"
+var dmg : int = 49
 
 func _ready():
 	pass
 
 func _process(_delta):
-	
+	sword_shape.disabled = true
 	if Input.is_action_just_pressed("basic_attack"):
 		attack()
 		
@@ -84,6 +88,8 @@ func is_attacking():
 func attack():
 	if dir == "down":
 		anim.play("attack_down")
+		
+		sword_shape.disabled = false
 	elif dir == "left":
 		anim.play("left_side_attack")
 	elif dir == "right":
@@ -112,4 +118,5 @@ func calculate_velocity_and_slide(input_direction):
 	move_and_slide()
 	
 
-	
+func _on_sword_hitbox_detector_body_entered(body):
+	pass # Replace with function body.
