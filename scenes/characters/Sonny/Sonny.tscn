@@ -237,12 +237,14 @@ _data = {
 radius = 8.90623
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ltlo"]
-size = Vector2(34.7222, 24.4444)
+size = Vector2(35.1389, 20.5556)
 
 [node name="Sonny" type="CharacterBody2D"]
+z_index = 10
+z_as_relative = false
 scale = Vector2(1.8, 1.8)
-collision_layer = 7
-collision_mask = 5
+collision_layer = 3
+collision_mask = 3
 platform_on_leave = 2
 script = ExtResource("1_hk164")
 
@@ -264,20 +266,40 @@ libraries = {
 script = ExtResource("3_umlbm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-light_mask = 3
-visibility_layer = 3
+z_index = 10
 shape = SubResource("CircleShape2D_6shcr")
 
 [node name="Sword_Hitbox_Detector" type="Area2D" parent="."]
-position = Vector2(3.88889, 6.66667)
+z_as_relative = false
 collision_layer = 4
 collision_mask = 4
 
-[node name="Sword_Hitbox" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
-position = Vector2(-3.88889, 1.66667)
+[node name="Sword_Hitbox_Downwards" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
+light_mask = 5
+visibility_layer = 5
+position = Vector2(0.763895, 14.1667)
 shape = SubResource("RectangleShape2D_3ltlo")
-disabled = true
+
+[node name="Sword_Hitbox_Up" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
+light_mask = 5
+visibility_layer = 5
+position = Vector2(1.11111, -8.33333)
+shape = SubResource("RectangleShape2D_3ltlo")
+
+[node name="Sword_Hitbox_Left" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
+light_mask = 5
+visibility_layer = 5
+position = Vector2(-17.2222, 1.66667)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_3ltlo")
+
+[node name="Sword_Hitbox_Right" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
+light_mask = 5
+visibility_layer = 5
+position = Vector2(18.8889, 1.66667)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_3ltlo")
 
 [connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="Sprite2D/AnimationPlayer" method="_on_animation_finished"]
+[connection signal="area_entered" from="Sword_Hitbox_Detector" to="." method="_on_sword_hitbox_detector_area_entered"]
 [connection signal="body_entered" from="Sword_Hitbox_Detector" to="." method="_on_sword_hitbox_detector_body_entered"]

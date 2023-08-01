@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://d0g7j1i12dgmj" path="res://assets/GrassHops Asset Pack/npcs/soldier_01/soldier_01.png" id="2_hdjb8"]
 [ext_resource type="PackedScene" uid="uid://crptx17xlt3gm" path="res://scenes/emotion/emotion.tscn" id="3_flbyy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vup4s"]
-size = Vector2(5, 10.3199)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_apskq"]
 atlas = ExtResource("2_hdjb8")
 region = Rect2(32, 0, 32, 32)
@@ -32,13 +29,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaojb"]
 size = Vector2(5.14472, 20.8994)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vup4s"]
+size = Vector2(5, 10.3199)
+
 [node name="soldier_01" type="CharacterBody2D"]
 scale = Vector2(1.8, 1.8)
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_gqdcm")
-
-[node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(-0.277778, -5.95118)
-shape = SubResource("RectangleShape2D_vup4s")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13.1313)
@@ -54,5 +52,18 @@ shape = SubResource("RectangleShape2D_jaojb")
 [node name="Emotion" parent="." instance=ExtResource("3_flbyy")]
 position = Vector2(0, -36.0269)
 
+[node name="Damage_Receiver" type="Area2D" parent="."]
+position = Vector2(-0.555556, -13.0583)
+scale = Vector2(1.72777, 1.24911)
+collision_layer = 5
+collision_mask = 5
+
+[node name="Collider" type="CollisionShape2D" parent="Damage_Receiver"]
+z_as_relative = false
+position = Vector2(2.08616e-07, 0.224579)
+scale = Vector2(1.31039, 2.34808)
+shape = SubResource("RectangleShape2D_vup4s")
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="area_entered" from="Damage_Receiver" to="." method="_on_damage_receiver_area_entered"]
