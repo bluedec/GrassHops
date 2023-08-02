@@ -10,12 +10,19 @@ var combo_cooldown : float = 0.5
 var dir = "down"
 var dmg : int = 49
 var health : int = 295
+var knockback_strength = Vector2()
 
 func _ready():
+	knockback_strength.x = position.x * 0.3
+	knockback_strength.y = position.y * 0.3
 	pass
 
 func _physics_process(delta):
-	sword_hitbox.disabled = true
+	if !is_attacking():
+		$Sword_Hitbox_Detector/Sword_Hitbox_Downwards.disabled = true
+		$Sword_Hitbox_Detector/Sword_Hitbox_Left.disabled = true
+		$Sword_Hitbox_Detector/Sword_Hitbox_Right.disabled = true
+
 	if Input.is_action_just_pressed("basic_attack"):
 		attack()
 		
@@ -88,11 +95,14 @@ func is_attacking():
 func attack():
 	if dir == "down":
 		anim.play("attack_down")
-		sword_hitbox.disabled = false
+		$Sword_Hitbox_Detector/Sword_Hitbox_Downwards.disabled = false
+		
 	elif dir == "left":
 		anim.play("left_side_attack")
+		$Sword_Hitbox_Detector/Sword_Hitbox_Left.disabled = false
 	elif dir == "right":
 		anim.play("right_side_attack")
+		$Sword_Hitbox_Detector/Sword_Hitbox_Right.disabled = false
 
 #	if combo == 0:
 #		if dir == "down":
@@ -118,7 +128,6 @@ func calculate_velocity_and_slide(input_direction):
 	
 
 func _on_sword_detector_detector_body_entered(body):
-	print("Should take damage here!")
 	body.take_damage()
 	pass # Replace with function body.
 
@@ -126,8 +135,11 @@ func take_damage(dmg):
 	health -= dmg
 	pass
 
-func _on_sword_detector_detector_area_entered(area):
+
+func _on_sword_hitbox_detector_area_entered(area):
 	var parent = area.get_parent()
-	parent.take_damage(dmg)
+	print(parent)
+	parent.take_damage(dmg, knockback_strength)
+	
 	
 	pass # Replace with function body.

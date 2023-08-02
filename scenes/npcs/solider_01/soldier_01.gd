@@ -19,7 +19,7 @@ func _physics_process(_delta):
 		emotion_controller.idle()
 	pass
 
-func take_damage(dmg):
+func take_damage(dmg, knockback_strength):
 	health -= dmg
 
 func _on_area_2d_mouse_entered():

@@ -284,13 +284,16 @@ position = Vector2(-157, -1)
 position = Vector2(-119, 418)
 
 [node name="Pyzm2" parent="." instance=ExtResource("4_fdrrb")]
-position = Vector2(-16, 330)
+position = Vector2(-410, 71)
 
 [node name="Pyzm3" parent="." instance=ExtResource("4_fdrrb")]
-position = Vector2(-74, -183)
+position = Vector2(151, 97)
 
 [node name="Pyzm4" parent="." instance=ExtResource("4_fdrrb")]
-position = Vector2(-486, 113)
+position = Vector2(-193, -280)
 
 [node name="Pyzm5" parent="." instance=ExtResource("4_fdrrb")]
-position = Vector2(394, 145)
+position = Vector2(281, -226)
+
+[node name="Pyzm6" parent="." instance=ExtResource("4_fdrrb")]
+position = Vector2(389, 407)
