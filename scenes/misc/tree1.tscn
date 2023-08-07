@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://bvm0sddpsdneo"]
+
+[ext_resource type="Texture2D" uid="uid://bbj8fjc35j5lv" path="res://assets/GrassHops Asset Pack/misc/tree1.png" id="1_nfs74"]
+[ext_resource type="Script" path="res://scripts/tree1.gd" id="1_vyxtt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd28h"]
+atlas = ExtResource("1_nfs74")
+region = Rect2(0, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeuys"]
+atlas = ExtResource("1_nfs74")
+region = Rect2(96, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbkq8"]
+atlas = ExtResource("1_nfs74")
+region = Rect2(192, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aawl4"]
+atlas = ExtResource("1_nfs74")
+region = Rect2(288, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhwwa"]
+atlas = ExtResource("1_nfs74")
+region = Rect2(384, 0, 96, 112)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8v1ih"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd28h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeuys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbkq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aawl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhwwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aawl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbkq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeuys")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Tree" type="Area2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_vyxtt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(22, -56)
+sprite_frames = SubResource("SpriteFrames_8v1ih")
+frame_progress = 0.865744
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
+position = Vector2(14, -9)
+polygon = PackedVector2Array(-3, 8, 5, 6, 7, 3, 8, -9, 11, -16, 10, -21, 7, -23, -1, -25, -5, -24, -6, -21, -7, -18, -7, -12, -7, -3, -7, 4)

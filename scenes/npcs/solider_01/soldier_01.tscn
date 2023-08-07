@@ -27,13 +27,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaojb"]
-size = Vector2(5.14472, 20.8994)
+size = Vector2(1.44581, 10.7233)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vup4s"]
 size = Vector2(5, 10.3199)
 
 [node name="soldier_01" type="CharacterBody2D"]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_gqdcm")
@@ -43,6 +43,8 @@ position = Vector2(0, -13.1313)
 sprite_frames = SubResource("SpriteFrames_khu75")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(3.33333, 16.6667)
+scale = Vector2(6.72959, 2.30572)
 
 [node name="Mouse_Collider" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.555556, -13.0583)
@@ -55,8 +57,8 @@ position = Vector2(0, -36.0269)
 [node name="Damage_Receiver" type="Area2D" parent="."]
 position = Vector2(-0.555556, -13.0583)
 scale = Vector2(1.72777, 1.24911)
-collision_layer = 5
-collision_mask = 5
+collision_layer = 4
+collision_mask = 4
 
 [node name="Collider" type="CollisionShape2D" parent="Damage_Receiver"]
 z_as_relative = false

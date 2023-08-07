@@ -12,9 +12,8 @@ var dmg : int = 49
 var health : int = 295
 var knockback_strength = Vector2()
 
+
 func _ready():
-	knockback_strength.x = position.x * 0.3
-	knockback_strength.y = position.y * 0.3
 	pass
 
 func _physics_process(delta):
@@ -127,10 +126,6 @@ func calculate_velocity_and_slide(input_direction):
 	move_and_slide()
 	
 
-func _on_sword_detector_detector_body_entered(body):
-	body.take_damage()
-	pass # Replace with function body.
-
 func take_damage(dmg):
 	health -= dmg
 	pass
@@ -138,7 +133,16 @@ func take_damage(dmg):
 
 func _on_sword_hitbox_detector_area_entered(area):
 	var parent = area.get_parent()
-	print(parent)
+	
+	if position.x > parent.position.x && dir == "left":
+		knockback_strength.x = -100
+	elif position.x < parent.position.x && dir == "right":
+		knockback_strength.x = 100
+	if position.y > parent.position.y && dir == "up":
+		knockback_strength.y = -100
+	elif position.y < parent.position.y && dir == "down":
+		knockback_strength.y = 100
+		
 	parent.take_damage(dmg, knockback_strength)
 	
 	

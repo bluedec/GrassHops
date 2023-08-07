@@ -15,6 +15,7 @@ func _process(delta):
 
 	if health <= 0:
 		die()
+		return
 	if !player:
 		go_sleep()
 		return
@@ -62,7 +63,7 @@ func die():
 		
 
 func go_sleep():
-	print(mass)
+
 	while mass < 10:
 		mass += 0.1
 	gravity_scale = 0
@@ -71,13 +72,12 @@ func go_sleep():
 	pass
 
 func _on_damage_dealer_body_entered(body):
-	body.take_damage(damage)
+	body.take_damage()
 	
 
 func _on_bio_scanner_body_exited(body):
 	if body.name == "Sonny":
 		go_sleep()
 		player = null
-		print(mass)
-		
-	pass # Replace with function body.
+	
+
