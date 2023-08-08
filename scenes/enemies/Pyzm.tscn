@@ -44,19 +44,20 @@ _data = {
 radius = 42.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xk3br"]
-radius = 10.8098
+radius = 14.163
 
 [node name="Pyzm" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 6
-mass = 0.06
+mass = 0.01
 gravity_scale = -0.05
-lock_rotation = true
 script = ExtResource("1_54w5n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.4, 1.4)
+position = Vector2(-280, -42)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_tjidv")
+offset = Vector2(233.333, 35)
 hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]

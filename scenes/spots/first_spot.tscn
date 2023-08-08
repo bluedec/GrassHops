@@ -279,16 +279,13 @@ layer_0/tile_data = PackedInt32Array(-393226, 655360, 11, -327690, 524288, 3, -2
 position = Vector2(15, -106)
 
 [node name="Pyzm" parent="." instance=ExtResource("4_fdrrb")]
-position = Vector2(20, -15)
+position = Vector2(-204, 259)
 
 [node name="Sonny" parent="." instance=ExtResource("4_ctyk3")]
 position = Vector2(231, 28)
 
 [node name="Pyzm2" parent="." instance=ExtResource("4_fdrrb")]
-position = Vector2(91, 69)
-
-[node name="Pyzm3" parent="." instance=ExtResource("4_fdrrb")]
-position = Vector2(-15, 120)
+position = Vector2(-279, 110)
 
 [node name="tree_new" parent="." instance=ExtResource("6_o388m")]
 position = Vector2(-125, -13)
@@ -325,3 +322,5 @@ position = Vector2(366, -145)
 
 [node name="tree_new12" parent="." instance=ExtResource("6_o388m")]
 position = Vector2(318, -145)
+
+[node name="Node2D" type="Node2D" parent="."]

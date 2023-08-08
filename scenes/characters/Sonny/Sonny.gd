@@ -10,7 +10,7 @@ var combo_cooldown : float = 0.5
 var dir = "down"
 var dmg : int = 49
 var health : int = 295
-var knockback_strength = Vector2()
+var knockback_strength := Vector2()
 
 func _ready():
 	pass
@@ -150,13 +150,13 @@ func _on_sword_hitbox_detector_area_entered(area):
 	var parent = area.get_parent()
 	
 	if position.x > parent.position.x && dir == "left":
-		knockback_strength.x = -100
+		knockback_strength.x = -200
 	elif position.x < parent.position.x && dir == "right":
-		knockback_strength.x = 100
+		knockback_strength.x = 200
 	if position.y > parent.position.y && dir == "up":
-		knockback_strength.y = -100
+		knockback_strength.y = -200
 	elif position.y < parent.position.y && dir == "down":
-		knockback_strength.y = 100
+		knockback_strength.y = 200
 		
 	parent.take_damage(dmg, knockback_strength)
 	pass # Replace with function body.

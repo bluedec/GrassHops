@@ -1,9 +1,13 @@
 extends RigidBody2D
 
-var health = 100
-var damage = 10
+var health := 100
+var damage := 10
 var player = null
-var follow_speed = 0.1
+var threshold = null
+var negative_threshold = null
+var follow_speed := 0.1
+const REGULAR_FORCE = 5
+const REGULAR_NEGATIVE_FORCE = -5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,29 +20,76 @@ func _physics_process(delta):
 	if health <= 0:
 		die()
 		return
+		
 	if !player:
 		go_sleep()
 		return
 	else:
-		mass = 0.1
+		mass = 0.01
+		
 	
 	$Sprite2D/AnimationPlayer.play("jump")
 	
+	
+	
+	apply_force_to_sides()
+	react_to_close_player()
+	print(constant_force)
+	
+
 	if player.position.y > position.y:
-		gravity_scale = 0.03
+		constant_force.y = 1
 	else:
-		gravity_scale = -0.03
+		constant_force.y = -1
 	if player.position.x > position.x:
 		$Sprite2D.flip_h = true
-		constant_force.x = 1.3
 	else:
 		$Sprite2D.flip_h = false
-		constant_force.x = -1.3
+
+
+func react_to_close_player():
+	if going_up() && position.y > negative_threshold:
+		if player_is_left():
+			constant_force.x = -4
+		else:
+			constant_force.x = 4
+	if going_down() && position.y > threshold:
+		if player_is_left():
+			constant_force.x = -4
+		else:
+			constant_force.x = 4
+
+func apply_force_to_sides():
+		if player_is_left():
+			constant_force.x = -5
+		if player_is_right():
+			constant_force.x = 5
+		
+		
+
+
+func going_down() -> bool:
+	return constant_force.y > 0
+	
+func going_up() -> bool:
+	return constant_force.y < 0
+
+func player_is_left() -> bool:
+	if player.position.x > position.x:
+		return false
+	return true
+	
+func player_is_right() -> bool:
+	if player.position.x > position.x:
+		return true
+	return false
 
 
 func _on_bio_scanner_body_entered(body):
 	if body.name == "Sonny":
 		player = body
+		threshold = player.position.y - 84
+		negative_threshold = player.position.y + 84
 
 func take_damage(dmg, knockback_direction):
 	suffer_knockback(knockback_direction)
@@ -54,6 +105,10 @@ func suffer_knockback(knockback_direction):
 	pass
 	
 func die():
+	lock_rotation = false
+	
+	rotate(0.04)
+		
 	# drop coin?
 	# give xp to player
 	# play death animation
@@ -79,5 +134,6 @@ func _on_bio_scanner_body_exited(body):
 	if body.name == "Sonny":
 		go_sleep()
 		player = null
+		threshold = null
 	
 
