@@ -7,7 +7,6 @@ var has_reward = false
 var waiting_for_completion = true
 var health = 55
 
-
 func _physics_process(_delta):
 	if health <= 0:
 		visible = false

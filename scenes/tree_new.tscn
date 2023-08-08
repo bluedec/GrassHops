@@ -75,7 +75,7 @@ radius = 4.66667
 
 [node name="tree_new" type="StaticBody2D"]
 z_index = 11
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.4, 1.4)
 script = ExtResource("1_puarp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

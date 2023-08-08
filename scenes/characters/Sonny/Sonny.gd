@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var speed = 120
+@onready var speed = 140
 @onready var anim : AnimationPlayer = $Sprite2D/AnimationPlayer
 @onready var sword_detector : Area2D = $Sword_Hitbox_Detector
 @onready var sword_hitbox : CollisionShape2D = $Sword_Hitbox_Detector/Sword_Hitbox_Downwards
@@ -12,13 +12,13 @@ var dmg : int = 49
 var health : int = 295
 var knockback_strength = Vector2()
 
-
 func _ready():
 	pass
 
 func _physics_process(delta):
 	if !is_attacking():
 		$Sword_Hitbox_Detector/Sword_Hitbox_Downwards.disabled = true
+		$Sword_Hitbox_Detector/Sword_Hitbox_Up.disabled = true
 		$Sword_Hitbox_Detector/Sword_Hitbox_Left.disabled = true
 		$Sword_Hitbox_Detector/Sword_Hitbox_Right.disabled = true
 
@@ -89,19 +89,22 @@ func handle_movement(input_direction):
 func is_attacking():
 	return anim.current_animation == "attack_down" \
 	or anim.current_animation == "left_side_attack" \
-	or anim.current_animation == "right_side_attack"
+	or anim.current_animation == "right_side_attack" \
+	or anim.current_animation == "attack_up_1"
 	
 func attack():
 	if dir == "down":
 		anim.play("attack_down")
 		$Sword_Hitbox_Detector/Sword_Hitbox_Downwards.disabled = false
-		
 	elif dir == "left":
 		anim.play("left_side_attack")
 		$Sword_Hitbox_Detector/Sword_Hitbox_Left.disabled = false
 	elif dir == "right":
 		anim.play("right_side_attack")
 		$Sword_Hitbox_Detector/Sword_Hitbox_Right.disabled = false
+	elif dir == "up":
+		anim.play("attack_up_1")
+		$Sword_Hitbox_Detector/Sword_Hitbox_Up.disabled = false
 
 #	if combo == 0:
 #		if dir == "down":
@@ -119,6 +122,18 @@ func attack():
 #	else:
 #		combo = 0
 #		combo_cooldown = 0.5
+	
+
+
+func attack_thrust(dir):
+	if dir == "right":
+		position.x += 4
+	elif dir == "left":
+		position.x -= 4
+	elif dir == "up":
+		position.y -= 4
+	elif dir == "down":
+		position.y += 4
 	
 
 func calculate_velocity_and_slide(input_direction):
@@ -144,6 +159,4 @@ func _on_sword_hitbox_detector_area_entered(area):
 		knockback_strength.y = 100
 		
 	parent.take_damage(dmg, knockback_strength)
-	
-	
 	pass # Replace with function body.
