@@ -34,8 +34,7 @@ func _physics_process(delta):
 	
 	apply_force_to_sides()
 	react_to_close_player()
-	print(constant_force)
-	
+
 
 	if player.position.y > position.y:
 		constant_force.y = 1

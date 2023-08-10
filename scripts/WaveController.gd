@@ -11,10 +11,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	find_player()
 	pass
 
 func next_wave():
 	var added_currency = wave_currency * 0.3
 	wave += 1
 	
+	pass
+	
+func find_player():
+	
+	print(get_parent().get_node("Sonny").health)
 	pass
