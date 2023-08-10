@@ -130,9 +130,6 @@ func _on_damage_dealer_body_entered(body):
 	
 
 func _on_bio_scanner_body_exited(body):
-	if body.name == "Sonny":
-		go_sleep()
-		player = null
-		threshold = null
+	pass
 	
 

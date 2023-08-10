@@ -13,6 +13,4 @@ func _ready():
 
 func _on_area_2d_body_entered(body):
 	if body.name == "Sonny":
-		print("player close")
-		print(body.position.y > position.y)
 		player = body

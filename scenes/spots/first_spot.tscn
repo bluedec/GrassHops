@@ -271,6 +271,11 @@ sources/0 = SubResource("TileSetAtlasSource_b5vge")
 
 [node name="first_spot" type="Node"]
 
+[node name="Sonny" parent="." instance=ExtResource("4_ctyk3")]
+position = Vector2(231, 28)
+
+[node name="WaveController" parent="." instance=ExtResource("6_wvigi")]
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_2o20w")
 format = 2
@@ -282,46 +287,43 @@ position = Vector2(15, -106)
 [node name="Pyzm" parent="." instance=ExtResource("4_fdrrb")]
 position = Vector2(-204, 259)
 
-[node name="Sonny" parent="." instance=ExtResource("4_ctyk3")]
-position = Vector2(231, 28)
-
 [node name="Pyzm2" parent="." instance=ExtResource("4_fdrrb")]
 position = Vector2(-279, 110)
 
-[node name="tree_new" parent="." instance=ExtResource("6_o388m")]
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="tree_new" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(-125, -13)
 
-[node name="tree_new2" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new2" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(143, 104)
 
-[node name="tree_new3" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new3" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(200, -115)
 
-[node name="tree_new4" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new4" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(-15, -176)
 
-[node name="tree_new5" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new5" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(-346, 26)
 
-[node name="tree_new6" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new6" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(-78, 143)
 
-[node name="tree_new7" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new7" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(-21, -76)
 
-[node name="tree_new8" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new8" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(-236, -137)
 
-[node name="tree_new9" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new9" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(197, 44)
 
-[node name="tree_new10" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new10" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(465, 161)
 
-[node name="tree_new11" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new11" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(366, -145)
 
-[node name="tree_new12" parent="." instance=ExtResource("6_o388m")]
+[node name="tree_new12" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(318, -145)
-
-[node name="WaveController" parent="." instance=ExtResource("6_wvigi")]
