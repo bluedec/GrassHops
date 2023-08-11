@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dn31om0ysodla"]
+[gd_scene load_steps=10 format=3 uid="uid://dn31om0ysodla"]
 
 [ext_resource type="Texture2D" uid="uid://b20abatm6bexe" path="res://assets/Texture/TX Tileset Grass.png" id="1_cwtq3"]
 [ext_resource type="PackedScene" uid="uid://vh257mladysl" path="res://scenes/characters/Sonny/Sonny.tscn" id="4_ctyk3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cr4dk8akklmbb" path="res://scenes/npcs/solider_01/soldier_01.tscn" id="4_h3g85"]
 [ext_resource type="PackedScene" uid="uid://dmu5bkjj24swk" path="res://scenes/tree_new.tscn" id="6_o388m"]
 [ext_resource type="PackedScene" uid="uid://dq1p27wqf8hqn" path="res://scenes/controllers/wave_controller.tscn" id="6_wvigi"]
+[ext_resource type="Script" path="res://scripts/Enemies.gd" id="7_8ov4a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b5vge"]
 texture = ExtResource("1_cwtq3")
@@ -327,3 +328,7 @@ position = Vector2(366, -145)
 
 [node name="tree_new12" parent="Trees" instance=ExtResource("6_o388m")]
 position = Vector2(318, -145)
+
+[node name="Enemies" type="Node2D" parent="."]
+z_index = 12
+script = ExtResource("7_8ov4a")

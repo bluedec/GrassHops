@@ -137,13 +137,13 @@ func attack():
 
 func attack_thrust(dir):
 	if dir == 1:
-		position.x += 4
+		position.x += 6
 	elif dir == 3:
-		position.x -= 4
+		position.x -= 6
 	elif dir == 0:
-		position.y -= 4
+		position.y -= 6
 	elif dir == 2:
-		position.y += 4
+		position.y += 6
 	
 
 func calculate_velocity_and_slide(input_direction):
