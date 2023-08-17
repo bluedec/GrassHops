@@ -11,8 +11,10 @@ func _process(delta):
 	pass
 	
 
-func add_children(children):
-	for child in children:
-		add_child(child)
-		pass
+func move_towards(pivot_position: Vector2, offset: Vector2):
+	position = pivot_position
+	position += offset
 	pass
+	
+
+

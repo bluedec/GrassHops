@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://vh257mladysl"]
+[gd_scene load_steps=24 format=3 uid="uid://vh257mladysl"]
 
 [ext_resource type="Script" path="res://scenes/characters/Sonny/Sonny.gd" id="1_hk164"]
 [ext_resource type="Texture2D" uid="uid://baeqsu8b6wnx8" path="res://assets/GrassHops Asset Pack/characters/sonny.png" id="2_aw34o"]
@@ -22,7 +22,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_1wts6"]
 resource_name = "attack_down"
 length = 0.36
-step = 0.05
+step = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,11 +42,17 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.15),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.1, 0.153, 0.273),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": [2],
+"args": [],
 "method": &"attack_thrust"
+}, {
+"args": [2],
+"method": &"activate_weapon_hitbox"
+}, {
+"args": [2],
+"method": &"deactivate_weapon_hitbox"
 }]
 }
 
@@ -89,17 +95,51 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.15),
+"times": PackedFloat32Array(0.15, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"attack_thrust"
+}, {
+"args": [0],
+"method": &"deactivate_weapon_hitbox"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7kq74"]
+resource_name = "dash_down"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [168, 169, 170, 171, 172, 173]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [0],
-"method": &"attack_thrust"
+"args": [],
+"method": &"no_longer_dashing"
 }]
 }
 
 [sub_resource type="Animation" id="Animation_b1vmk"]
 resource_name = "idle"
-length = 0.7495
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -108,10 +148,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [96, 97, 98, 99, 100, 101, 102]
+"values": [96, 97, 98, 99, 100, 101]
 }
 
 [sub_resource type="Animation" id="Animation_r2xv8"]
@@ -137,11 +177,14 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [3],
+"args": [],
 "method": &"attack_thrust"
+}, {
+"args": [3],
+"method": &"deactivate_weapon_hitbox"
 }]
 }
 
@@ -182,7 +225,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_5lvab"]
 resource_name = "right_side_attack"
 length = 0.482
-step = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -202,11 +245,20 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.2, 0.34, 0.39, 0.43),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
-"args": [1],
+"args": [],
 "method": &"attack_thrust"
+}, {
+"args": [],
+"method": &"activate_extra_hitbox"
+}, {
+"args": [1],
+"method": &"deactivate_weapon_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_extra_hitbox"
 }]
 }
 
@@ -301,6 +353,7 @@ _data = {
 "attack_down": SubResource("Animation_1wts6"),
 "attack_down_special": SubResource("Animation_5aoot"),
 "attack_up_1": SubResource("Animation_gno6k"),
+"dash_down": SubResource("Animation_7kq74"),
 "idle": SubResource("Animation_b1vmk"),
 "left_side_attack": SubResource("Animation_r2xv8"),
 "left_side_idle": SubResource("Animation_rxstf"),
@@ -320,30 +373,35 @@ height = 26.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ltlo"]
 size = Vector2(35.1389, 20.5556)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ojh7q"]
+size = Vector2(77.75, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuylp"]
+size = Vector2(18, 13)
+
 [node name="Sonny" type="CharacterBody2D"]
 z_index = 10
 z_as_relative = false
-scale = Vector2(1.5, 1.5)
+scale = Vector2(2, 2)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_hk164")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -17.62)
-zoom = Vector2(2, 2)
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 drag_left_margin = 0.1
 drag_top_margin = 0.1
 drag_right_margin = 0.1
 drag_bottom_margin = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 0.666667)
 texture = ExtResource("2_aw34o")
 offset = Vector2(8, -0.666667)
 hframes = 12
-vframes = 14
+vframes = 15
 frame = 60
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
@@ -358,6 +416,7 @@ position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_t0mlk")
 
 [node name="Sword_Hitbox_Detector" type="Area2D" parent="."]
+z_index = 10
 z_as_relative = false
 collision_layer = 4
 collision_mask = 4
@@ -372,14 +431,14 @@ disabled = true
 [node name="Sword_Hitbox_Up" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
 light_mask = 5
 visibility_layer = 5
-position = Vector2(1.11111, -8.33333)
-shape = SubResource("RectangleShape2D_3ltlo")
+position = Vector2(0, -19.5)
+shape = SubResource("RectangleShape2D_ojh7q")
 disabled = true
 
 [node name="Sword_Hitbox_Left" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
 light_mask = 5
 visibility_layer = 5
-position = Vector2(-17.2222, 1.66667)
+position = Vector2(-22, 6.5)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_3ltlo")
 disabled = true
@@ -387,9 +446,15 @@ disabled = true
 [node name="Sword_Hitbox_Right" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
 light_mask = 5
 visibility_layer = 5
-position = Vector2(18.8889, 1.66667)
+position = Vector2(21.5, -9)
 rotation = 1.57079
 shape = SubResource("RectangleShape2D_3ltlo")
+disabled = true
+
+[node name="Sword_Hitbox_Right_Two" type="CollisionShape2D" parent="Sword_Hitbox_Detector"]
+position = Vector2(19.5, 11)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_xuylp")
 disabled = true
 
 [connection signal="area_entered" from="Sword_Hitbox_Detector" to="." method="_on_sword_hitbox_detector_area_entered"]

@@ -1,5 +1,11 @@
 extends AnimationPlayer
 
+enum DIRECTION {
+	DOWN,
+	UP,
+	LEFT,
+	RIGHT
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
