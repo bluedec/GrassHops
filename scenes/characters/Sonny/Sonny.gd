@@ -10,14 +10,16 @@ extends CharacterBody2D
 @onready var anim : AnimationPlayer = $Sprite2D/AnimationPlayer
 @onready var sword_detector : Area2D = $Sword_Hitbox_Detector
 @onready var sword_hitbox : CollisionShape2D = $Sword_Hitbox_Detector/Sword_Hitbox_Downwards
+@onready var dash_time = anim.get_animation("dash_down").length
+@onready var new_dash_charge_timer = $Timer
 
-
-var dashing : bool = false
+var dir : int = 2
 var combo : int = 0
+var dash_charges : int = 3
+var dashing : bool = false
+var recharging : bool = false
 var combo_cooldown : float = 0.5
-var dir = 2
-var breath_speed_slowed := 0.3
-var dash_charges = 3
+var breath_speed_slowed : float = 0.3
 
 
 enum DIRECTION {
@@ -30,16 +32,27 @@ enum DIRECTION {
 
 func _ready():
 	var timer = Timer.new()
+	
 	timer.wait_time = 5
 	pass
 
 ######### EACH FRAME(right?) #########
 func _physics_process(delta):
+	anim.get_animation("dash_down")
+	print(dash_charges, recharging, new_dash_charge_timer.time_left)
+	if dash_charges < 3 && !recharging:
+		recharging = true
+		new_dash_charge_timer.start()
+		print("time left: ", new_dash_charge_timer.time_left)
+		pass
+		
 	
-	if Input.is_action_just_pressed("basic_attack"):
+	if Input.is_action_just_pressed("basic_attack") && !dashing:
 		attack()
 	
-	if Input.is_action_just_pressed("dash"):
+	print("are we dashing?: ", dashing)
+	
+	if Input.is_action_just_pressed("dash") && dash_charges > 0 && !dashing:
 		dash_down()
 	
 	var input_direction = Vector2(
@@ -58,13 +71,13 @@ func _physics_process(delta):
 	if is_attacking():
 		return
 	
-	if dashing == true:
-		return
-	
 	$Sword_Hitbox_Detector/Sword_Hitbox_Up.disabled = true
 	$Sword_Hitbox_Detector/Sword_Hitbox_Right.disabled = true
 	$Sword_Hitbox_Detector/Sword_Hitbox_Downwards.disabled = true
 	$Sword_Hitbox_Detector/Sword_Hitbox_Left.disabled = true
+	
+	if dashing == true:
+		return
 	
 	if dir == 3:
 		if moving:
@@ -107,7 +120,10 @@ func say(what: String):
 func dash_down():
 	anim.play("dash_down")
 	dashing = true
-	position.y += 45
+	dash_charges -= 1
+	recharging = false
+	new_dash_charge_timer.stop()
+	position.y += 75
 	pass
 
 func no_longer_dashing():
@@ -248,4 +264,11 @@ func _on_sword_hitbox_detector_area_entered(area):
 		knockback_strength.y = 200
 		
 	parent.take_damage(dmg, knockback_strength)
+	pass # Replace with function body.
+
+
+func _on_timer_timeout():
+	print("finished!")
+	recharging = false
+	dash_charges += 1
 	pass # Replace with function body.

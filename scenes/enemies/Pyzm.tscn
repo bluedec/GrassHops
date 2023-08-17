@@ -47,7 +47,10 @@ radius = 77.9012
 radius = 14.163
 
 [node name="Pyzm" type="RigidBody2D"]
-z_index = 12
+top_level = true
+light_mask = 7
+visibility_layer = 7
+z_index = 21
 collision_layer = 4
 collision_mask = 6
 mass = 0.01

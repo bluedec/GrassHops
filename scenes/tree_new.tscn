@@ -3,6 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://jjedmybj0ik4" path="res://assets/GrassHops Asset Pack/misc/tree2.png" id="1_g8g0d"]
 [ext_resource type="Script" path="res://scenes/tree_new.gd" id="1_puarp"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2dcl0"]
+radius = 127.377
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_71lfq"]
+radius = 4.66667
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ilwn7"]
 atlas = ExtResource("1_g8g0d")
 region = Rect2(0, 0, 128, 128)
@@ -67,36 +73,27 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2dcl0"]
-radius = 127.377
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_71lfq"]
-radius = 4.66667
-
 [node name="tree_new" type="StaticBody2D"]
-z_index = 11
+z_index = 5
+z_as_relative = false
 scale = Vector2(2, 2)
 script = ExtResource("1_puarp")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="detector_range" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2dcl0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_71lfq")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 50
+z_as_relative = false
 position = Vector2(-0.714285, -13.5714)
 sprite_frames = SubResource("SpriteFrames_c8jpf")
 frame_progress = 0.140165
 speed_scale = 0.5
 offset = Vector2(5.71429, -25.7143)
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, -14)
-collision_layer = 2
-collision_mask = 2
-
-[node name="detector_range" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2(-7.85714, 32.5714)
-shape = SubResource("CircleShape2D_2dcl0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.11758e-22, -5.71429)
-shape = SubResource("CircleShape2D_71lfq")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

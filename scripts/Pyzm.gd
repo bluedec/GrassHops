@@ -37,9 +37,9 @@ func _physics_process(delta):
 
 
 	if player.position.y > position.y:
-		constant_force.y = 1
+		constant_force.y = 0.4
 	else:
-		constant_force.y = -1
+		constant_force.y = -0.4
 	if player.position.x > position.x:
 		$Sprite2D.flip_h = true
 	else:
@@ -49,20 +49,20 @@ func _physics_process(delta):
 func react_to_close_player():
 	if going_up() && position.y > negative_threshold:
 		if player_is_left():
-			constant_force.x = -4
+			constant_force.x = -3
 		else:
-			constant_force.x = 4
+			constant_force.x = 3
 	if going_down() && position.y > threshold:
 		if player_is_left():
-			constant_force.x = -4
+			constant_force.x = -3
 		else:
-			constant_force.x = 4
+			constant_force.x = 3
 
 func apply_force_to_sides():
 		if player_is_left():
-			constant_force.x = -5
+			constant_force.x = -4
 		if player_is_right():
-			constant_force.x = 5
+			constant_force.x = 4
 		
 		
 
@@ -117,7 +117,6 @@ func die():
 		
 
 func go_sleep():
-
 	while mass < 10:
 		mass += 0.1
 	gravity_scale = 0
