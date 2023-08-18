@@ -38,19 +38,17 @@ func _ready():
 
 ######### EACH FRAME(right?) #########
 func _physics_process(delta):
-	anim.get_animation("dash_down")
-	print(dash_charges, recharging, new_dash_charge_timer.time_left)
+	if dashing == true:
+		return
+		
 	if dash_charges < 3 && !recharging:
 		recharging = true
 		new_dash_charge_timer.start()
 		print("time left: ", new_dash_charge_timer.time_left)
 		pass
 		
-	
 	if Input.is_action_just_pressed("basic_attack") && !dashing:
 		attack()
-	
-	print("are we dashing?: ", dashing)
 	
 	if Input.is_action_just_pressed("dash") && dash_charges > 0 && !dashing:
 		dash_down()
@@ -116,6 +114,12 @@ func _physics_process(delta):
 
 func say(what: String):
 	print(what)
+	pass
+	
+func dash_thrust(dir: int):
+	if dir == 2:
+		position.y += 75
+	pass
 
 func dash_down():
 	anim.play("dash_down")
@@ -123,7 +127,6 @@ func dash_down():
 	dash_charges -= 1
 	recharging = false
 	new_dash_charge_timer.stop()
-	position.y += 75
 	pass
 
 func no_longer_dashing():
@@ -192,7 +195,7 @@ func handle_movement(input_direction):
 		calculate_velocity_and_slide(input_direction)
 		
 		
-func is_attacking():
+func is_attacking() -> bool:
 	return anim.current_animation == "attack_down" \
 	or anim.current_animation == "left_side_attack" \
 	or anim.current_animation == "right_side_attack" \
