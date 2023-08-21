@@ -109,8 +109,9 @@ func _physics_process(delta):
 #########  #########
 
 ######### Functions #########
-#### Most recently created is at top ####
-#### Oldest is at the bottom  ####
+#### Most recently at the top ####
+#### Oldest at the bottom  ####
+
 
 func say(what: String):
 	print(what)
@@ -252,6 +253,7 @@ func calculate_velocity_and_slide(input_direction):
 
 func take_damage(dmg):
 	health -= dmg
+	print(health)
 	pass
 
 func _on_sword_hitbox_detector_area_entered(area):
