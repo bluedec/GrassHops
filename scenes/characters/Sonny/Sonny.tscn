@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://vh257mladysl"]
+[gd_scene load_steps=26 format=3 uid="uid://vh257mladysl"]
 
 [ext_resource type="Script" path="res://scenes/characters/Sonny/Sonny.gd" id="1_hk164"]
 [ext_resource type="Texture2D" uid="uid://baeqsu8b6wnx8" path="res://assets/GrassHops Asset Pack/characters/sonny.png" id="2_aw34o"]
@@ -17,6 +17,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [60]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 14)]
 }
 
 [sub_resource type="Animation" id="Animation_1wts6"]
@@ -352,6 +364,74 @@ tracks/0/keys = {
 "values": [39, 40, 41, 42, 43, 44, 45]
 }
 
+[sub_resource type="Animation" id="Animation_sksvi"]
+resource_name = "dash_left"
+length = 0.28
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.18, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.18, 0.28),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [3],
+"method": &"dash_thrust"
+}, {
+"args": [],
+"method": &"no_longer_dashing"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_w5adv"]
+resource_name = "dash_right"
+length = 0.28
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.18, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 15), Vector2i(1, 15), Vector2i(2, 15), Vector2i(3, 15)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.18, 0.28),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [1],
+"method": &"dash_thrust"
+}, {
+"args": [],
+"method": &"no_longer_dashing"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hq4v6"]
 _data = {
 "RESET": SubResource("Animation_dyx6u"),
@@ -359,6 +439,8 @@ _data = {
 "attack_down_special": SubResource("Animation_5aoot"),
 "attack_up_1": SubResource("Animation_gno6k"),
 "dash_down": SubResource("Animation_7kq74"),
+"dash_left": SubResource("Animation_sksvi"),
+"dash_right": SubResource("Animation_w5adv"),
 "idle": SubResource("Animation_b1vmk"),
 "left_side_attack": SubResource("Animation_r2xv8"),
 "left_side_idle": SubResource("Animation_rxstf"),
@@ -405,8 +487,8 @@ drag_bottom_margin = 0.1
 position = Vector2(0, 0.666667)
 texture = ExtResource("2_aw34o")
 hframes = 13
-vframes = 14
-frame = 60
+vframes = 16
+frame = 182
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

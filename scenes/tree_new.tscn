@@ -80,11 +80,13 @@ scale = Vector2(2, 2)
 script = ExtResource("1_puarp")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="detector_range" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_2dcl0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.5)
 shape = SubResource("CircleShape2D_71lfq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

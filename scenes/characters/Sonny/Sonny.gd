@@ -51,6 +51,12 @@ func _physics_process(delta):
 		attack()
 	
 	if Input.is_action_just_pressed("dash") && dash_charges > 0 && !dashing:
+		if dir == 3:
+			dash_left()
+			return
+		if dir == 1:
+			dash_right()
+			return
 		dash_down()
 	
 	var input_direction = Vector2(
@@ -118,10 +124,32 @@ func say(what: String):
 	pass
 	
 func dash_thrust(dir: int):
+	if dir == 3:
+		position.x -= 170
+		return
 	if dir == 2:
-		position.y += 75
-	pass
+		position.y += 170
+		return
+	if dir == 1:
+		position.x += 170
+		return
 
+func dash_right():
+	anim.play("dash_right")
+	dashing = true
+	dash_charges -= 1
+	recharging = false
+	new_dash_charge_timer.stop()
+	pass
+	
+func dash_left():
+	anim.play("dash_left")
+	dashing = true
+	dash_charges -= 1
+	recharging = false
+	new_dash_charge_timer.stop()
+	pass
+	
 func dash_down():
 	anim.play("dash_down")
 	dashing = true
