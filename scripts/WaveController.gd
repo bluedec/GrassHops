@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var pyzm_scene = preload("res://scenes/enemies/Pyzm.tscn")
+@export var active = true
+
 var wave = 0
 var wave_currency : int = 10
 var player_position = null
@@ -13,16 +15,18 @@ var spawn_diddle = Vector2(-10, -10)
 
 
 func _ready():
-	player_position_timer.connect("timeout", func(): player_position = player.position)
-	player_position_timer.wait_time = 10
-	player_position_timer.autostart = true
-	player_position_timer.one_shot = false
-	player_position_timer.start()
-	player_position_timer.connect("timeout", find_player)
-	new_wave_timer.wait_time = 5
-	new_wave_timer.connect("timeout", next_wave)
-	new_wave_timer.one_shot = false
-	new_wave_timer.start()
+	if active:
+		player_position_timer.connect("timeout", func(): player_position = player.position)
+		player_position_timer.wait_time = 10
+		player_position_timer.autostart = true
+		player_position_timer.one_shot = false
+		player_position_timer.start()
+		player_position_timer.connect("timeout", find_player)
+		new_wave_timer.wait_time = 5
+		new_wave_timer.connect("timeout", next_wave)
+		new_wave_timer.one_shot = false
+		new_wave_timer.start()
+		
 
 func _process(delta):
 	pass

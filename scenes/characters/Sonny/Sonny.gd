@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var dmg : int = 49
 @export var health : int = 295
 @export var knockback_strength := Vector2()
-
+@export var bullet_scene = preload("res://scenes/misc/bullet.tscn")
 
 @onready var speed = 140
 @onready var anim : AnimationPlayer = $Sprite2D/AnimationPlayer
@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var sword_hitbox : CollisionShape2D = $Sword_Hitbox_Detector/Sword_Hitbox_Downwards
 @onready var dash_time = anim.get_animation("dash_down").length
 @onready var new_dash_charge_timer = $Timer
+@onready var bullet_down_position = $bullet_down_position
 
 var dir : int = 2
 var combo : int = 0
@@ -38,19 +39,40 @@ func _ready():
 
 ######### EACH FRAME(right?) #########
 func _physics_process(delta):
-	if dashing == true:
+	if is_shooting():
+		return
+	
+	if dashing:
 		return
 		
 	if dash_charges < 3 && !recharging:
 		recharging = true
 		new_dash_charge_timer.start()
-		print("time left: ", new_dash_charge_timer.time_left)
 		pass
 		
+	if is_attacking():
+		return
+		
+	if Input.is_action_just_pressed("Shoot") && !dashing && !is_attacking():
+		if dir == 0:
+			shoot_up()
+			pass
+		if dir == 1:
+			shoot_right()
+			pass
+		if dir == 2:
+			shoot_down()
+			pass
+		if dir == 3:
+			shoot_left()
+			pass
+		pass
+	
 	if Input.is_action_just_pressed("basic_attack") && !dashing:
 		attack()
 	
 	if Input.is_action_just_pressed("dash") && dash_charges > 0 && !dashing:
+		
 		if dir == 3:
 			dash_left()
 			return
@@ -81,6 +103,9 @@ func _physics_process(delta):
 	$Sword_Hitbox_Detector/Sword_Hitbox_Left.disabled = true
 	
 	if dashing == true:
+		return
+		
+	if is_shooting():
 		return
 	
 	if dir == 3:
@@ -118,6 +143,46 @@ func _physics_process(delta):
 #### Most recently at the top ####
 #### Oldest at the bottom  ####
 
+func is_shooting() -> bool:
+	return anim.current_animation == "shoot_down"
+
+func shoot_up():
+	var bullet = bullet_scene.instantiate()
+	anim.play("shoot_down")
+	bullet.position = $bullet_up_position.global_position
+	bullet.dir = 0
+	bullet.advance()
+	get_parent().add_child(bullet)
+	pass
+	
+func shoot_right():
+	var bullet = bullet_scene.instantiate()
+	anim.play("shoot_down")
+	bullet.position = $bullet_right_position.global_position
+	bullet.dir = 1
+	bullet.rotation = 80
+	bullet.advance()
+	get_parent().add_child(bullet)
+	pass
+	
+func shoot_down():
+	var bullet = bullet_scene.instantiate()
+	anim.play("shoot_down")
+	bullet.position = $bullet_down_position.global_position
+	bullet.dir = 2
+	bullet.advance()
+	get_parent().add_child(bullet)
+	pass
+	
+func shoot_left():
+	var bullet = bullet_scene.instantiate()
+	anim.play("shoot_down")
+	bullet.rotation = 80
+	bullet.position = $bullet_left_position.global_position
+	bullet.dir = 3
+	bullet.advance()
+	get_parent().add_child(bullet)
+	pass
 
 func say(what: String):
 	print(what)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://biaktu633hlge"]
+
+[ext_resource type="Script" path="res://scripts/Item.gd" id="1_0vvy7"]
+
+[node name="BloodRing" type="Node"]
+script = ExtResource("1_0vvy7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

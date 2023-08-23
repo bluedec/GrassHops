@@ -52,7 +52,7 @@ scale = Vector2(1.72777, 1.24911)
 shape = SubResource("RectangleShape2D_jaojb")
 
 [node name="Emotion" parent="." instance=ExtResource("3_flbyy")]
-position = Vector2(0, -36.0269)
+position = Vector2(0, -35.5)
 
 [node name="Damage_Receiver" type="Area2D" parent="."]
 position = Vector2(-0.555556, -13.0583)
