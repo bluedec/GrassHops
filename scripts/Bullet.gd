@@ -3,8 +3,7 @@ extends Node2D
 var range = 200
 var dir : int = 0
 var dmg : int = 0
-var collided : bool = false
-@export var speed = 9
+@export var speed = 12
 
 
 # Called when the node enters the scene tree for the first time.
