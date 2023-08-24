@@ -96,6 +96,9 @@ scale = Vector2(2, 2)
 script = ExtResource("1_ampa7")
 
 [node name="Area2D" type="Area2D" parent="."]
+z_as_relative = false
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_rfg05")
@@ -103,6 +106,7 @@ shape = SubResource("CircleShape2D_rfg05")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g73hs")
 animation = &"travelling"
-frame_progress = 0.91115
+frame_progress = 0.943086
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -14,11 +14,13 @@ extends CharacterBody2D
 @onready var new_dash_charge_timer = $Timer
 @onready var bullet_down_position = $bullet_down_position
 
+
 var dir : int = 2
 var combo : int = 0
 var dash_charges : int = 3
 var dashing : bool = false
 var recharging : bool = false
+var bullet_damage : int = 15
 var combo_cooldown : float = 0.5
 var breath_speed_slowed : float = 0.3
 
@@ -170,6 +172,7 @@ func shoot_down():
 	anim.play("shoot_down")
 	bullet.position = $bullet_down_position.global_position
 	bullet.dir = 2
+	bullet.dmg = bullet_damage
 	bullet.advance()
 	get_parent().add_child(bullet)
 	pass
@@ -346,7 +349,6 @@ func calculate_velocity_and_slide(input_direction):
 
 func take_damage(dmg):
 	health -= dmg
-	print(health)
 	pass
 
 func _on_sword_hitbox_detector_area_entered(area):

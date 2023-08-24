@@ -2,6 +2,7 @@ extends Node2D
 
 var range = 200
 var dir : int = 0
+var dmg : int = 0
 @export var speed = 12
 
 
@@ -20,7 +21,6 @@ func _process(delta):
 		
 	advance()
 	
-	
 
 func advance():
 	if dir == 0:
@@ -36,3 +36,10 @@ func advance():
 func _on_area_2d_body_entered(body):
 	print(body.name)
 	pass 
+
+
+func _on_area_2d_area_entered(area):
+	var body = area.get_parent()
+	body.take_damage(dmg, Vector2(0, 15))
+	print(body.health)
+	pass # Replace with function body.
