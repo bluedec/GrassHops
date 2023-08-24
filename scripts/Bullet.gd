@@ -2,7 +2,11 @@ extends Node2D
 
 var range = 200
 var dir : int = 0
-@export var speed = 12
+var dmg : int = 0
+var collided : bool = false
+@export var speed = 8
+
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,14 +17,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	range -= 3
-	if range < 1:
-		print("freeing!")
-		queue_free()
+	if !collided:
+		range -= 1
+		if range < 1:
+			print("freeing!")
+			queue_free()
+		advance()
 		
-	advance()
-	
-	
 
 func advance():
 	if dir == 0:
@@ -33,6 +36,29 @@ func advance():
 		translate(Vector2(-speed, 0))
 	pass
 
+func collide():
+	collided = true
+	if dir == 0:
+		$AnimatedSprite2D.flip_v = true
+		pass
+	if dir == 3:
+		$AnimatedSprite2D.flip_h = true
+		pass
+	$AnimatedSprite2D.play("collision")
+	await $AnimatedSprite2D.animation_finished
+	queue_free()
+	pass
+
 func _on_area_2d_body_entered(body):
 	print(body.name)
+	collide()
 	pass 
+
+
+func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	print(body)
+	if body.is_in_group("Enemies"):
+		body.take_damage(dmg)
+		collide()
+		pass
+	

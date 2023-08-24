@@ -23,6 +23,7 @@ var combo_cooldown : float = 0.5
 var breath_speed_slowed : float = 0.3
 
 
+
 enum DIRECTION {
 	DOWN,
 	UP,
@@ -39,8 +40,7 @@ func _ready():
 
 ######### EACH FRAME(right?) #########
 func _physics_process(delta):
-	if is_shooting():
-		return
+
 	
 	if dashing:
 		return
@@ -151,6 +151,7 @@ func shoot_up():
 	anim.play("shoot_down")
 	bullet.position = $bullet_up_position.global_position
 	bullet.dir = 0
+	bullet.dmg = 500
 	bullet.advance()
 	get_parent().add_child(bullet)
 	pass
@@ -160,16 +161,19 @@ func shoot_right():
 	anim.play("shoot_down")
 	bullet.position = $bullet_right_position.global_position
 	bullet.dir = 1
+	bullet.dmg = 500
 	bullet.rotation = 80
 	bullet.advance()
 	get_parent().add_child(bullet)
 	pass
 	
+
 func shoot_down():
 	var bullet = bullet_scene.instantiate()
 	anim.play("shoot_down")
 	bullet.position = $bullet_down_position.global_position
 	bullet.dir = 2
+	bullet.dmg = 500
 	bullet.advance()
 	get_parent().add_child(bullet)
 	pass
@@ -177,9 +181,10 @@ func shoot_down():
 func shoot_left():
 	var bullet = bullet_scene.instantiate()
 	anim.play("shoot_down")
-	bullet.rotation = 80
+	bullet.rotation = 80.2
 	bullet.position = $bullet_left_position.global_position
 	bullet.dir = 3
+	bullet.dmg = 500
 	bullet.advance()
 	get_parent().add_child(bullet)
 	pass
@@ -269,7 +274,7 @@ func lower_breath_speed():
 	if anim.current_animation == "idle" \
 	or anim.current_animation == "left_side_idle":
 		anim.speed_scale = breath_speed_slowed
-	pass
+
 
 func handle_movement(input_direction):
 	if input_direction.x > 0:
@@ -293,7 +298,8 @@ func is_attacking() -> bool:
 	return anim.current_animation == "attack_down" \
 	or anim.current_animation == "left_side_attack" \
 	or anim.current_animation == "right_side_attack" \
-	or anim.current_animation == "attack_up_1"
+	or anim.current_animation == "attack_up_1" \
+	or anim.current_animation == "shoot_down"
 	
 func attack():
 	if dir == 2:

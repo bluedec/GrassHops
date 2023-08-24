@@ -7,7 +7,7 @@
 radius = 127.377
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_71lfq"]
-radius = 4.66667
+radius = 0.624513
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ilwn7"]
 atlas = ExtResource("1_g8g0d")
@@ -73,26 +73,30 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="tree_new" type="StaticBody2D"]
-z_index = 5
+[node name="tree_new" type="StaticBody2D" groups=["Obstacles"]]
+z_index = 12
 z_as_relative = false
+y_sort_enabled = true
 scale = Vector2(2, 2)
+collision_layer = 513
 script = ExtResource("1_puarp")
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
+collision_layer = 513
 
 [node name="detector_range" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_2dcl0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.5)
+position = Vector2(1, -3.5)
+scale = Vector2(6.45483, 6.45483)
 shape = SubResource("CircleShape2D_71lfq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 50
 z_as_relative = false
-position = Vector2(-0.714285, -13.5714)
+position = Vector2(-0.5, -13.5)
 sprite_frames = SubResource("SpriteFrames_c8jpf")
 frame_progress = 0.140165
 speed_scale = 0.5

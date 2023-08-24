@@ -332,9 +332,7 @@ z_index = 12
 script = ExtResource("7_8ov4a")
 
 [node name="Pyzm2" parent="." instance=ExtResource("4_fdrrb")]
-z_as_relative = false
 position = Vector2(-288, 118)
 
 [node name="Pyzm" parent="." instance=ExtResource("4_fdrrb")]
-z_as_relative = false
 position = Vector2(-146, 265)
