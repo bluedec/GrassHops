@@ -63,7 +63,7 @@ func _physics_process(delta):
 			shoot_right()
 			pass
 		if dir == 2:
-			shoot_down()
+			anim.play("shoot_down")
 			pass
 		if dir == 3:
 			shoot_left()

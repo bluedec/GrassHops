@@ -79,7 +79,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"travelling",
-"speed": 10.0
+"speed": 30.0
 }]
 
 [node name="Bullet" type="Node2D"]
