@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var dash_time = anim.get_animation("dash_down").length
 @onready var new_dash_charge_timer = $Timer
 @onready var bullet_down_position = $bullet_down_position
+@onready var interact_range : CollisionShape2D = $Interaction_Range/CollisionShape2D
 
 
 var dir : int = 2
@@ -55,7 +56,11 @@ func _physics_process(delta):
 	if is_attacking():
 		return
 		
-	if Input.is_action_just_pressed("Shoot") && !dashing && !is_attacking():
+	if Input.is_action_just_pressed("interact"):
+		interact_range.set_deferred("disabled", false)
+		
+		pass
+	if Input.is_action_just_pressed("shoot") && !dashing && !is_attacking():
 		if dir == 0:
 			shoot_up()
 			pass
@@ -376,4 +381,17 @@ func _on_timer_timeout():
 	print("finished!")
 	recharging = false
 	dash_charges += 1
+	pass # Replace with function body.
+
+
+func _on_interaction_range_body_entered(body):
+	interact_range.set_deferred("disabled", true)
+	print("body: ", body)
+	pass # Replace with function body.
+
+
+func _on_interaction_range_area_entered(area):
+	interact_range.set_deferred("disabled", true)
+	print("area: ", area)
+	var body = area.get_parent()
 	pass # Replace with function body.

@@ -57,7 +57,7 @@ position = Vector2(0, -35.5)
 [node name="Damage_Receiver" type="Area2D" parent="."]
 position = Vector2(-0.555556, -13.0583)
 scale = Vector2(1.72777, 1.24911)
-collision_layer = 4
+collision_layer = 20
 collision_mask = 4
 
 [node name="Collider" type="CollisionShape2D" parent="Damage_Receiver"]

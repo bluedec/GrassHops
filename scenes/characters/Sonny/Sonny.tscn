@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://vh257mladysl"]
+[gd_scene load_steps=28 format=3 uid="uid://vh257mladysl"]
 
 [ext_resource type="Script" path="res://scenes/characters/Sonny/Sonny.gd" id="1_hk164"]
 [ext_resource type="Texture2D" uid="uid://baeqsu8b6wnx8" path="res://assets/GrassHops Asset Pack/characters/sonny.png" id="2_aw34o"]
@@ -509,6 +509,9 @@ size = Vector2(77.75, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xuylp"]
 size = Vector2(18, 13)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gxrst"]
+radius = 9.25
+
 [node name="Sonny" type="CharacterBody2D"]
 z_index = 10
 z_as_relative = false
@@ -607,5 +610,16 @@ position = Vector2(23.5, 0)
 visible = false
 position = Vector2(-2, -18.5)
 
+[node name="Interaction_Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction_Range"]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_gxrst")
+disabled = true
+
 [connection signal="area_entered" from="Sword_Hitbox_Detector" to="." method="_on_sword_hitbox_detector_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Interaction_Range" to="." method="_on_interaction_range_area_entered"]
+[connection signal="body_entered" from="Interaction_Range" to="." method="_on_interaction_range_body_entered"]
