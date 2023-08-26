@@ -120,7 +120,7 @@ func go_sleep():
 	pass
 
 func _on_damage_dealer_body_entered(body):
-	body.health -= 15	
+	body.health -= 15
 	
 
 func _on_bio_scanner_body_exited(body):
