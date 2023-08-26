@@ -47,14 +47,8 @@ func collide():
 	queue_free()
 	pass
 
-func _on_area_2d_body_entered(body):
-	print(body.name)
-	collide()
-	pass 
-
-
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	print(body)
+	print(body, " lol")
 	if body.is_in_group("Enemies"):
 		body.take_damage(dmg)
 		collide()

@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var dmg : int = 49
 @export var health : int = 295
+@export var bullet_damage : int = 15
 @export var knockback_strength := Vector2()
 @export var bullet_scene = preload("res://scenes/misc/bullet.tscn")
 
@@ -14,13 +15,13 @@ extends CharacterBody2D
 @onready var new_dash_charge_timer = $Timer
 @onready var bullet_down_position = $bullet_down_position
 
-
 var dir : int = 2
 var combo : int = 0
 var dash_charges : int = 3
+
 var dashing : bool = false
+var aiming : bool = false
 var recharging : bool = false
-var bullet_damage : int = 15
 var combo_cooldown : float = 0.5
 var breath_speed_slowed : float = 0.3
 
@@ -42,8 +43,6 @@ func _ready():
 
 ######### EACH FRAME(right?) #########
 func _physics_process(delta):
-
-	
 	if dashing:
 		return
 		
@@ -71,10 +70,11 @@ func _physics_process(delta):
 		pass
 	
 	if Input.is_action_just_pressed("basic_attack") && !dashing:
+		aiming = false
 		attack()
 	
 	if Input.is_action_just_pressed("dash") && dash_charges > 0 && !dashing:
-		
+		aiming = false
 		if dir == 3:
 			dash_left()
 			return
@@ -88,7 +88,10 @@ func _physics_process(delta):
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 		)
 	input_direction.normalized()
-	
+	if input_direction != Vector2.ZERO:
+		aiming = false
+		pass
+		
 	var moving = input_direction.x != 0 or input_direction.y != 0
 	
 	if is_attacking():
@@ -107,8 +110,15 @@ func _physics_process(delta):
 	if dashing == true:
 		return
 		
-	if is_shooting():
-		return
+	
+	if aiming:
+		if dir == 0:
+			anim.play("")
+			pass
+		if dir == 2:
+			anim.play("shoot_down_idle")
+			return
+		pass
 	
 	if dir == 3:
 		if moving:
@@ -153,7 +163,7 @@ func shoot_up():
 	anim.play("shoot_down")
 	bullet.position = $bullet_up_position.global_position
 	bullet.dir = 0
-	bullet.dmg = 500
+	bullet.dmg = bullet_damage
 	bullet.advance()
 	get_parent().add_child(bullet)
 	pass
@@ -163,7 +173,7 @@ func shoot_right():
 	anim.play("shoot_down")
 	bullet.position = $bullet_right_position.global_position
 	bullet.dir = 1
-	bullet.dmg = 500
+	bullet.dmg = bullet_damage
 	bullet.rotation = 80
 	bullet.advance()
 	get_parent().add_child(bullet)
@@ -171,6 +181,7 @@ func shoot_right():
 	
 
 func shoot_down():
+	aiming = true
 	var bullet = bullet_scene.instantiate()
 	anim.play("shoot_down")
 	bullet.position = $bullet_down_position.global_position
@@ -186,7 +197,7 @@ func shoot_left():
 	bullet.rotation = 80.2
 	bullet.position = $bullet_left_position.global_position
 	bullet.dir = 3
-	bullet.dmg = 500
+	bullet.dmg = bullet_damage
 	bullet.advance()
 	get_parent().add_child(bullet)
 	pass
