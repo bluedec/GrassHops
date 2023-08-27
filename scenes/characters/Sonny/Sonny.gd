@@ -54,18 +54,20 @@ func _physics_process(delta):
 	if is_attacking():
 		return
 		
-	if Input.is_action_just_pressed("Shoot") && !dashing && !is_attacking():
+	
+	if Input.is_action_just_pressed("Shoot") && !dashing && !is_attacking() \
+	&& !is_shooting():
 		if dir == 0:
-			shoot_up()
+			anim.play("shoot_up")
 			pass
 		if dir == 1:
-			shoot_right()
+			anim.play("shoot_right")
 			pass
 		if dir == 2:
 			anim.play("shoot_down")
 			pass
 		if dir == 3:
-			shoot_left()
+			anim.play("shoot_left")
 			pass
 		pass
 	
@@ -75,11 +77,11 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("dash") && dash_charges > 0 && !dashing:
 		aiming = false
-		if dir == 3:
-			dash_left()
-			return
 		if dir == 1:
 			dash_right()
+			return
+		if dir == 3:
+			dash_left()
 			return
 		dash_down()
 	
@@ -92,14 +94,18 @@ func _physics_process(delta):
 		aiming = false
 		pass
 		
+	
 	var moving = input_direction.x != 0 or input_direction.y != 0
 	
-	if is_attacking():
+	if is_attacking() or is_shooting():
 		input_direction = input_direction * 0.1
 		
 	handle_movement(input_direction)
 	
 	if is_attacking():
+		return
+		
+	if is_shooting():
 		return
 	
 	$Sword_Hitbox_Detector/Sword_Hitbox_Up.disabled = true
@@ -110,43 +116,45 @@ func _physics_process(delta):
 	if dashing == true:
 		return
 		
-	
 	if aiming:
 		if dir == 0:
-			anim.play("")
-			pass
-		if dir == 2:
+			anim.play("shoot_up_idle")
+			return
+		if dir == 1:
+			anim.play("shoot_right_idle")
+			return
+		elif dir == 2:
 			anim.play("shoot_down_idle")
+			return
+		elif dir == 3:
+			anim.play("shoot_left_idle")
 			return
 		pass
 	
-	if dir == 3:
+	if dir == 0:
 		if moving:
-			anim.play("left_side_running")
+			anim.play("running_upwards")
 		else:
-			anim.play("left_side_idle")
-
-	elif dir == 1:
+			anim.play("upwards_idle")
+			
+	if dir == 1:
 		if moving:
 			anim.play("right_side_running")
 		else:
 			anim.play("right_side_idle")
 #
 	elif dir == 2:
-		if dashing:
-			
-			pass
 		if moving:
 			anim.play("running_front")
 		else:
 			anim.play("idle")
 			
-	elif dir == 0:
+	elif dir == 3:
 		if moving:
-			anim.play("running_upwards")
+			anim.play("left_side_running")
 		else:
-			anim.play("upwards_idle")
-
+			anim.play("left_side_idle")
+			
 	combo_cooldown -= 0.01
 	
 #########  #########
@@ -156,26 +164,29 @@ func _physics_process(delta):
 #### Oldest at the bottom  ####
 
 func is_shooting() -> bool:
-	return anim.current_animation == "shoot_down"
+	return anim.current_animation == "shoot_down" \
+	or anim.current_animation == "shoot_right" \
+	or anim.current_animation == "shoot_left" \
+	or anim.current_animation == "shoot_up"
 
 func shoot_up():
+	aiming = true
 	var bullet = bullet_scene.instantiate()
-	anim.play("shoot_down")
 	bullet.position = $bullet_up_position.global_position
 	bullet.dir = 0
 	bullet.dmg = bullet_damage
-	bullet.advance()
+	
 	get_parent().add_child(bullet)
 	pass
 	
 func shoot_right():
+	aiming = true
 	var bullet = bullet_scene.instantiate()
-	anim.play("shoot_down")
 	bullet.position = $bullet_right_position.global_position
+	bullet.rotation = 80.2
 	bullet.dir = 1
 	bullet.dmg = bullet_damage
-	bullet.rotation = 80
-	bullet.advance()
+	
 	get_parent().add_child(bullet)
 	pass
 	
@@ -183,22 +194,21 @@ func shoot_right():
 func shoot_down():
 	aiming = true
 	var bullet = bullet_scene.instantiate()
-	anim.play("shoot_down")
 	bullet.position = $bullet_down_position.global_position
 	bullet.dir = 2
 	bullet.dmg = bullet_damage
-	bullet.advance()
+	
 	get_parent().add_child(bullet)
 	pass
 	
 func shoot_left():
+	aiming = true
 	var bullet = bullet_scene.instantiate()
-	anim.play("shoot_down")
-	bullet.rotation = 80.2
 	bullet.position = $bullet_left_position.global_position
+	bullet.rotation = 80.2
 	bullet.dir = 3
 	bullet.dmg = bullet_damage
-	bullet.advance()
+	
 	get_parent().add_child(bullet)
 	pass
 
@@ -207,14 +217,14 @@ func say(what: String):
 	pass
 	
 func dash_thrust(dir: int):
-	if dir == 3:
-		position.x -= 170
-		return
-	if dir == 2:
-		position.y += 170
-		return
 	if dir == 1:
 		position.x += 170
+		return
+	if dir == 2:
+		position.y += 130
+		return
+	if dir == 3:
+		position.x -= 170
 		return
 
 func dash_right():
@@ -311,8 +321,7 @@ func is_attacking() -> bool:
 	return anim.current_animation == "attack_down" \
 	or anim.current_animation == "left_side_attack" \
 	or anim.current_animation == "right_side_attack" \
-	or anim.current_animation == "attack_up_1" \
-	or anim.current_animation == "shoot_down"
+	or anim.current_animation == "attack_up_1" 
 	
 func attack():
 	if dir == 2:

@@ -1,10 +1,10 @@
 extends Node2D
 
-var range = 200
+var range = 700
 var dir : int = 0
 var dmg : int = 0
 var collided : bool = false
-@export var speed = 12
+@export var speed = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -49,8 +49,11 @@ func collide():
 
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	print(body, " lol")
-	if body.is_in_group("Enemies"):
-		body.take_damage(dmg)
+	if body.is_in_group("Obstacles"):
 		collide()
+		pass
+	if body.is_in_group("Enemies"):
+		collide()
+		body.take_damage(dmg)
 		pass
 	
