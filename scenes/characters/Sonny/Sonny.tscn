@@ -34,7 +34,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_1wts6"]
 resource_name = "attack_down"
 length = 0.36
-step = 0.05
+step = 0.01
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,8 +42,8 @@ tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.153, 0.273),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.1, 0.153, 0.273, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"attack_thrust"
@@ -53,6 +53,9 @@ tracks/0/keys = {
 }, {
 "args": [2],
 "method": &"deactivate_weapon_hitbox"
+}, {
+"args": [],
+"method": &"stop_atak"
 }]
 }
 tracks/1/type = "value"
@@ -83,11 +86,14 @@ tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.06, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.06, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
 "method": &"attack_thrust"
+}, {
+"args": [],
+"method": &"stop_atak"
 }, {
 "args": [0],
 "method": &"deactivate_weapon_hitbox"
@@ -264,7 +270,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_r2xv8"]
 resource_name = "left_side_attack"
 length = 0.49
-step = 0.05
+step = 0.01
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -272,14 +278,17 @@ tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.15, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.15, 0.4, 0.49),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
 "method": &"attack_thrust"
 }, {
 "args": [3],
 "method": &"deactivate_weapon_hitbox"
+}, {
+"args": [],
+"method": &"stop_atak"
 }]
 }
 tracks/1/type = "value"
@@ -331,7 +340,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_5lvab"]
 resource_name = "right_side_attack"
 length = 0.528
-step = 0.01
+step = 0.001
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -339,8 +348,8 @@ tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.17, 0.2, 0.25, 0.37, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.17, 0.2, 0.25, 0.37, 0.45, 0.528),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"attack_thrust"
@@ -356,6 +365,9 @@ tracks/0/keys = {
 }, {
 "args": [],
 "method": &"deactivate_extra_hitbox"
+}, {
+"args": [],
+"method": &"stop_atak"
 }]
 }
 tracks/1/type = "value"
@@ -462,11 +474,14 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.06),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.06, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"shoot_down"
+}, {
+"args": [],
+"method": &"stop_shooting"
 }]
 }
 
@@ -483,6 +498,17 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(2, 16)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_8v178"]
@@ -508,11 +534,14 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.06),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.06, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"shoot_left"
+}, {
+"args": [],
+"method": &"stop_shooting"
 }]
 }
 
@@ -530,6 +559,17 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 18)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_lmj53"]
@@ -555,11 +595,14 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.06),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.06, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"shoot_right"
+}, {
+"args": [],
+"method": &"stop_shooting"
 }]
 }
 
@@ -581,8 +624,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_cnqd8"]
 resource_name = "shoot_up"
-length = 0.15
-step = 0.03
+length = 0.18
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -590,10 +633,10 @@ tracks/0/path = NodePath(".:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(0, 19), Vector2i(1, 19), Vector2i(2, 19), Vector2i(3, 19), Vector2i(4, 19)]
+"values": [Vector2i(0, 19), Vector2i(1, 19), Vector2i(2, 19), Vector2i(3, 19), Vector2i(4, 19), Vector2i(5, 19)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -602,11 +645,14 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.06),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.06, 0.18),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"shoot_up"
+}, {
+"args": [],
+"method": &"stop_shooting"
 }]
 }
 
@@ -734,7 +780,6 @@ z_index = 10
 shape = SubResource("CapsuleShape2D_t0mlk")
 
 [node name="Sword_Hitbox_Detector" type="Area2D" parent="."]
-visible = false
 z_index = 10
 z_as_relative = false
 collision_layer = 4
@@ -781,15 +826,19 @@ wait_time = 0.5
 one_shot = true
 
 [node name="bullet_down_position" type="Marker2D" parent="."]
+visible = false
 position = Vector2(2.5, 8)
 
 [node name="bullet_left_position" type="Marker2D" parent="."]
+visible = false
 position = Vector2(-19, -6)
 
 [node name="bullet_right_position" type="Marker2D" parent="."]
+visible = false
 position = Vector2(17.5, -6.5)
 
 [node name="bullet_up_position" type="Marker2D" parent="."]
+visible = false
 position = Vector2(-1.5, -22)
 
 [node name="Tree_Collider" type="CollisionShape2D" parent="."]

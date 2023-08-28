@@ -4,7 +4,7 @@ var range = 700
 var dir : int = 0
 var dmg : int = 0
 var collided : bool = false
-@export var speed = 1
+@export var speed = 5
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +18,6 @@ func _process(delta):
 	if !collided:
 		range -= 1
 		if range < 1:
-			print("freeing!")
 			queue_free()
 		advance()
 		
@@ -48,7 +47,6 @@ func collide():
 	pass
 
 func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	print(body, " lol")
 	if body.is_in_group("Obstacles"):
 		collide()
 		pass
