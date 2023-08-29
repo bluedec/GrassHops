@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @export var dmg : int = 49
 @export var health : int = 295
 @export var bullet_damage : int = 15
@@ -25,9 +24,10 @@ var breath_speed_slowed : float = 0.3
 var dashing : bool = false
 #   attacking is used to disable movement and stop idle animations from playing
 var attacking : bool = false
-#   shooting is used to play the shooting idle animation
 var shooting : bool = false
+#   aiming is used to play the shooting idle animation
 var aiming : bool = false
+#   recharging is used to activate/deactivate the recharge of the dash
 var recharging : bool = false
 
 func _ready():
@@ -67,13 +67,10 @@ func _physics_process(delta):
 			anim.play("shoot_left")
 			shooting = true
 	
-
-	
 	if Input.is_action_just_pressed("basic_attack") && !dashing:
 		shooting = false
 		aiming = false
 		attack()
-	
 	
 	if Input.is_action_just_pressed("dash") && dash_charges > 0 && !dashing:
 		shooting = false
@@ -90,6 +87,7 @@ func _physics_process(delta):
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 		)
+	
 	input_direction.normalized()
 	
 	if input_direction != Vector2.ZERO:
@@ -100,9 +98,11 @@ func _physics_process(delta):
 	var moving = input_direction.x != 0 or input_direction.y != 0
 	
 	if attacking or shooting:
+		# slow the player
 		input_direction = input_direction * 0.1
 		
 	
+	# early returns
 	if attacking:
 		return
 	
@@ -110,6 +110,12 @@ func _physics_process(delta):
 	$Sword_Hitbox_Detector/Sword_Hitbox_Right.disabled = true
 	$Sword_Hitbox_Detector/Sword_Hitbox_Downwards.disabled = true
 	$Sword_Hitbox_Detector/Sword_Hitbox_Left.disabled = true
+	
+	if is_attacking():
+		return
+	
+	if is_shooting():
+		return
 	
 	if dashing:
 		return
@@ -184,6 +190,13 @@ func atak():
 func stop_atak():
 	attacking = false 
 	
+
+func is_attacking() -> bool:
+	return anim.current_animation == "attack_down" \
+	or anim.current_animation == "left_side_attack" \
+	or anim.current_animation == "right_side_attack" \
+	or anim.current_animation == "attack_up_1"
+
 
 func is_shooting() -> bool:
 	return anim.current_animation == "shoot_down" \

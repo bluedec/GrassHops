@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dmu5bkjj24swk"]
+[gd_scene load_steps=15 format=3 uid="uid://dmu5bkjj24swk"]
 
 [ext_resource type="Texture2D" uid="uid://jjedmybj0ik4" path="res://assets/GrassHops Asset Pack/misc/tree2.png" id="1_g8g0d"]
 [ext_resource type="Script" path="res://scenes/tree_new.gd" id="1_puarp"]
@@ -73,6 +73,9 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q62eu"]
+polygon = PackedVector2Array(3.5, -12, 2.5, -15.5, -1, -48, -6.5, -48, -7, -41, -4.5, -38, -14.5, -47, -16, -46.5, -5.5, -31.5, -3, -25.5, -2.5, -21, -1, -12)
+
 [node name="tree_new" type="StaticBody2D" groups=["Obstacles"]]
 z_index = 13
 z_as_relative = false
@@ -95,7 +98,6 @@ scale = Vector2(6.45483, 6.45483)
 shape = SubResource("CircleShape2D_71lfq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 13
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(-0.5, -25)
@@ -103,5 +105,8 @@ sprite_frames = SubResource("SpriteFrames_c8jpf")
 frame_progress = 0.140165
 speed_scale = 0.5
 offset = Vector2(5.71429, -25.7143)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_q62eu")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
